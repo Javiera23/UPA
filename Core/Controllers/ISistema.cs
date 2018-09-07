@@ -41,5 +41,6 @@ namespace Core.Controllers
         /// <param name="rutEmail">RUT o Correo Electronico</param>
         /// <returns>La persona si existe</returns>
         Persona Find(string rutEmail);
+
     }
 }
