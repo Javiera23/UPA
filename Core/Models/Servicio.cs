@@ -30,8 +30,6 @@ namespace Core.Models
                 
            
         }   
-        
-
-        
+      
     }
 }
