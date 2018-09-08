@@ -41,5 +41,38 @@ namespace Core.Controllers
         /// <param name="rutEmail">RUT o Correo Electronico</param>
         /// <returns>La persona si existe</returns>
         Persona Find(string rutEmail);
+      
+        /// <summary>
+        /// Busqueda de una cotizacion por rut.
+        /// </summary>
+        /// <param name="rut"></param>
+        /// <returns></returns>
+        List<Cotizacion> Buscar(string rut);
+        
+        /// <summary>
+        /// Busqueda de una cotizacion por id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Cotizacion Buscar(int id);
+
+        /// <summary>
+        /// Guarda una cotizacion en el sistema.
+        /// </summary>
+        /// <param name="cotizacion"></param>
+        void Agregar(Cotizacion cotizacion);
+
+        /// <summary>
+        /// Elimina una cotizacion del sistema.
+        /// </summary>
+        /// <param name="cotizacion"></param>
+        void Eliminar(Cotizacion cotizacion);
+
+        /// <summary>
+        /// Modifica una cotizacion del sistema.
+        /// </summary>
+        /// <param name="cotizacion"></param>
+        void Modificar(Cotizacion cotizacion);
+        
     }
 }
