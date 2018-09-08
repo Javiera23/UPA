@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.DAO;
 using Core.Models;
+using System.Net.Mail;
 
 namespace Core.Controllers
 {
@@ -16,6 +17,8 @@ namespace Core.Controllers
         private readonly IRepository<Persona> _repositoryPersona;
 
         private readonly IRepository<Usuario> _repositoryUsuario;
+        
+        private readonly IRepository<Cotizacion> _repositoryCotizacion;
 
         /// <summary>
         /// Inicializa los repositorios internos de la clase.
@@ -27,10 +30,13 @@ namespace Core.Controllers
                                  throw new ArgumentNullException("Se requiere el repositorio de personas");
             _repositoryUsuario = repositoryUsuario ??
                                  throw new ArgumentNullException("Se requiere repositorio de usuarios");
-
+            _repositoryCotizacion = _repositoryCotizacion ??
+                                 throw new ArgumentNullException("Se requiere repositorio de cotizaciones");
+           
             // Inicializacion del repositorio.
             _repositoryPersona.Initialize();
             _repositoryUsuario.Initialize();
+            _repositoryCotizacion.Initialize();
         }
 
         /// <inheritdoc />
@@ -114,5 +120,50 @@ namespace Core.Controllers
         {
             return _repositoryPersona.GetAll(p => p.Rut.Equals(rutEmail) || p.Email.Equals(rutEmail)).FirstOrDefault();
         }
+
+        /// <inheritdoc />
+        public void Agregar(Cotizacion cotizacion)
+        {
+            if (cotizacion == null)
+            {
+                throw new ModelException("La cotizacion es null");
+            }
+            
+            _repositoryCotizacion.Add(cotizacion);
+                       
+        }
+        /// <inheritdoc />
+        public void Eliminar(Cotizacion cotizacion)
+        {
+            if (cotizacion == null)
+            {
+                throw new ModelException("La cotizacion es null");
+            }
+
+            _repositoryCotizacion.Remove(cotizacion);
+        }
+        
+        /// <inheritdoc />
+        public List<Cotizacion> Buscar(string rut)
+        {
+            return _repositoryCotizacion.GetAll(p => p.persona.Rut.Equals(rut)).ToList();
+        }
+        
+        
+        /// <inheritdoc />
+        public Cotizacion Buscar(int id)
+        {
+            return _repositoryCotizacion.GetById(id);
+        }
+
+        /// <inheritdoc />
+        public void Modificar(Cotizacion cotizacion)
+        {
+            Cotizacion cotizacionAux = _repositoryCotizacion.GetById(cotizacion.Id);
+            Eliminar(cotizacionAux);
+            Agregar(cotizacion);
+          
+        }
+                
     }
 }

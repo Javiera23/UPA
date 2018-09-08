@@ -22,4 +22,5 @@ namespace Core.DAO
         /// <returns></returns>
         Persona GetByRutOrEmail(string rutEmail);
     }
+    
 }
