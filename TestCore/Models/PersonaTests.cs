@@ -37,21 +37,24 @@ namespace TestCore.Models
             };
 
             // Error por rut null
-            Assert.Equal(Assert.Throws<ModelException>(() => persona.Validate()).Message, "Rut no puede ser null");
+            Assert.Equal("Rut no puede ser null", Assert.Throws<ModelException>(() => persona.Validate()).Message);
 
             // Error por rut incorrecto
             persona.Rut = "Hola Como estas?";
-            Assert.Equal(Assert.Throws<ModelException>(() => persona.Validate()).Message, "Rut no valido");
-
+            Assert.Equal("Rut no valido", Assert.Throws<ModelException>(() => persona.Validate()).Message);
             persona.Rut = "130144918";
             
-            Assert.Equal(Assert.Throws<ModelException>(() => persona.Validate()).Message, "Nombre no puede ser null o vacio");
-
+            // Error por Nombre null
+            Assert.Equal("Nombre no puede ser null o vacio", Assert.Throws<ModelException>(() => persona.Validate()).Message);
             persona.Nombre = "Diego";
-            Assert.Equal(Assert.Throws<ModelException>(() => persona.Validate()).Message, "Apellido Paterno no puede ser null o vacio");
 
+            // Error por Apellido null
+            Assert.Equal("Apellido Paterno no puede ser null o vacio", Assert.Throws<ModelException>(() => persona.Validate()).Message);
             persona.Paterno = "Urrutia";
-            Assert.Equal(Assert.Throws<ModelException>(() => persona.Validate()).Message, "Email no puede ser null o vacio");
+
+            // Error por Email null
+            Assert.Equal("Email no puede ser null o vacio", Assert.Throws<ModelException>(() => persona.Validate()).Message);
+            persona.Email = "durrutia@ucn.cl";
 
             _output.WriteLine(Utils.ToJson(persona));
         }
