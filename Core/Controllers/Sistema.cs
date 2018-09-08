@@ -23,14 +23,14 @@ namespace Core.Controllers
         /// <summary>
         /// Inicializa los repositorios internos de la clase.
         /// </summary>
-        public Sistema(IRepository<Persona> repositoryPersona, IRepository<Usuario> repositoryUsuario)
+        public Sistema(IRepository<Persona> repositoryPersona, IRepository<Usuario> repositoryUsuario,IRepository<Cotizacion> repositoryCotizacion)
         {
             // Setter!
             _repositoryPersona = repositoryPersona ??
                                  throw new ArgumentNullException("Se requiere el repositorio de personas");
             _repositoryUsuario = repositoryUsuario ??
                                  throw new ArgumentNullException("Se requiere repositorio de usuarios");
-            _repositoryCotizacion = _repositoryCotizacion ??
+            _repositoryCotizacion = repositoryCotizacion ??
                                  throw new ArgumentNullException("Se requiere repositorio de cotizaciones");
            
             // Inicializacion del repositorio.
