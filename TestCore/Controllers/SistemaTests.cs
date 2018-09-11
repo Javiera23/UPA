@@ -129,12 +129,13 @@ namespace TestCore.Controllers
                     fecha = DateTime.Now,
                     estado = Estado.ACEPTADO,
                     persona = persona,
-                    precio = 40000,
                     servicios = new List<Servicio>()
                 };
 
                 sistema.Agregar(cotizacion);
             }
+            
+            
 
             // Buscar Cotizacion
             {

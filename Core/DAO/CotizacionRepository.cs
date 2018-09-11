@@ -14,7 +14,7 @@ namespace Core.DAO
         
         public List<Cotizacion> GetByRut(string rut)
         {
-            return _dbContext.Set<Cotizacion>().Where(p => p.persona.Rut.Equals(rut)).ToList();
+            return base.GetAll(c => c.rutEquals(rut)).ToList();
         }
 
         public Cotizacion GetById(int id)
