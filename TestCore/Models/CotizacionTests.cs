@@ -45,9 +45,9 @@ namespace TestCore.Models
                 descripcion = "Video cumpleaños 20",
                 etapa = Etapa.ENTREGADO,
                 nombre = "Video 01",
-                precio = 10000
             };
-                          
+
+            
             List<Servicio> servicios = new List<Servicio>();
             servicios.Add(servicio);           
             
@@ -63,12 +63,12 @@ namespace TestCore.Models
             cotizacion.Validate();
 
             // Fecha en el futuro
-            {
-                cotizacion.fecha=DateTime.Now.AddDays(1);
-                Assert.Equal("Fecha  no puede ser en el futuro.", Assert.Throws<ModelException>(() => cotizacion.Validate()).Message);
-            }
+            //{
+            //    cotizacion.fecha=DateTime.Now.AddDays(1);
+            //    Assert.Equal("Fecha  no puede ser en el futuro.", Assert.Throws<ModelException>(() => cotizacion.Validate()).Message);
+            //}
             
-            // Precio negativo
+            // Precio 
             {
                 Assert.Equal(cotizacion.Precio(), servicio.precio);
             }

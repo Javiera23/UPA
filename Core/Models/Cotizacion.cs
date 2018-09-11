@@ -28,7 +28,6 @@ namespace Core.Models
             return persona.Rut.Equals(rut);
         }
 
-
         public int Precio()
         {
             int precio = 0;

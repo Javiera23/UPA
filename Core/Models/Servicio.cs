@@ -26,10 +26,7 @@ namespace Core.Models
             if (string.IsNullOrEmpty(descripcion))
             {
                 throw new ModelException("La descripcion no puede ser null o estar vacia");
-            }
-                
-           
-        }   
-      
+            }           
+        }      
     }
 }
