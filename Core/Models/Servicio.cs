@@ -6,7 +6,7 @@ namespace Core.Models
     public class Servicio : BaseEntity
     {
         [Required] public string nombre { get; set; }
-        [Required] public long precio { get; set; }
+        [Required] public int precio { get; set; }
         [Required] public string descripcion { get; set; }
         [Required] public Etapa etapa { get; set; }
         

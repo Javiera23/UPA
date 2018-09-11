@@ -39,7 +39,18 @@ namespace TestCore.Models
                 Materno = "Melo",
                 Rut = "193992773"
             };
+            Servicio servicio = new Servicio()
+            {
+                descripcion = "Video cumpleaños 20",
+                etapa = Etapa.ENTREGADO,
+                nombre = "Video 01",
+                precio = 10000
+            };
+            
+              
             List<Servicio> servicios = new List<Servicio>();
+            servicios.Add(servicio);
+            
             
             
             //Crear cotizacion correcta
@@ -49,9 +60,7 @@ namespace TestCore.Models
                 fecha = DateTime.Now,
                 estado = Estado.ACEPTADO,
                 persona = persona,
-                precio = 40000,
                 servicios = servicios
-                  
                     
             };
             
@@ -62,13 +71,11 @@ namespace TestCore.Models
                 cotizacion.persona = null;
                 Assert.Throws<ModelException>(() => cotizacion.Validate());
             }
-          
-            
-            //Precio negativo
+            //Precio
             {
-                cotizacion.precio = -1000;
-                Assert.Throws<ModelException>(() => cotizacion.Validate());
+                Assert.Equal(cotizacion.Precio(), servicio.precio);
             }
+           
         
 
         }

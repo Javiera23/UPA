@@ -102,6 +102,8 @@ namespace TestCore.Controllers
                 _output.WriteLine("Usuario: {0}", Utils.ToJson(usuario));
 
             }
+            
+            
 
         }
         
