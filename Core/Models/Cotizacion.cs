@@ -22,11 +22,6 @@ namespace Core.Models
                 throw new ModelException("Persona no puede ser null");
             }
 
-            if (fecha == null)
-            {
-                throw new ModelException("Fecha no puede ser null o vacio");
-            }
-
             if (precio < 0)
             {
                 throw new ModelException("El precio no puede ser negativo");
