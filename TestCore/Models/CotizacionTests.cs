@@ -39,38 +39,38 @@ namespace TestCore.Models
                 Materno = "Melo",
                 Rut = "193992773"
             };
-            List<Servicio> servicios = new List<Servicio>();
+            IList<Servicio> servicios = new List<Servicio>();
             
             
-            //Crear cotizacion correcta
+            // Crear cotizacion correcta
             Cotizacion cotizacion = new Cotizacion()
-            
             {
                 fecha = DateTime.Now,
                 estado = Estado.ACEPTADO,
                 persona = persona,
                 precio = 40000,
                 servicios = servicios
-                  
-                    
             };
             
             cotizacion.Validate();
-            
-            //Persona nula
+
+            // Fecha en el futuro
             {
-                cotizacion.persona = null;
-                Assert.Throws<ModelException>(() => cotizacion.Validate());
+                cotizacion.fecha=DateTime.Now.AddDays(1);
+                Assert.Equal("Fecha  no puede ser en el futuro.", Assert.Throws<ModelException>(() => cotizacion.Validate()).Message);
             }
-          
             
-            //Precio negativo
+            // Precio negativo
             {
                 cotizacion.precio = -1000;
                 Assert.Throws<ModelException>(() => cotizacion.Validate());
             }
-        
 
+            // Persona es null
+            {
+                cotizacion.persona = null;
+                Assert.Throws<ModelException>(() => cotizacion.Validate());
+            }        
         }
     }
 }

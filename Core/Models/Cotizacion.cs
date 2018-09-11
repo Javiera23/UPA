@@ -11,7 +11,7 @@ namespace Core.Models
     {
         [Required] public long precio { get; set;}
         [Required] public DateTime fecha { get; set; }
-        [Required] public List<Servicio> servicios = new List<Servicio>();
+        [Required] public IList<Servicio> servicios = new List<Servicio>();
         [Required] public Persona persona { get; set; }
         [Required] public Estado estado { get; set; }
         
@@ -27,12 +27,10 @@ namespace Core.Models
                 throw new ModelException("El precio no puede ser negativo");
             }
             
-            
+            if (fecha.CompareTo(DateTime.Now) >= 0)
+            {
+                throw new ModelException("Fecha  no puede ser en el futuro.");
+            }
         }
-
-
-        
-
-
     }
 }

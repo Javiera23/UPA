@@ -48,7 +48,7 @@ namespace Core
                     Console.WriteLine("Persona = " + Utils.ToJson(persona));
                 }
             }
-
+            
             Console.WriteLine("Done.");
         }
     }

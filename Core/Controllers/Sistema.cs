@@ -26,12 +26,9 @@ namespace Core.Controllers
         public Sistema(IRepository<Persona> repositoryPersona, IRepository<Usuario> repositoryUsuario,IRepository<Cotizacion> repositoryCotizacion)
         {
             // Setter!
-            _repositoryPersona = repositoryPersona ??
-                                 throw new ArgumentNullException("Se requiere el repositorio de personas");
-            _repositoryUsuario = repositoryUsuario ??
-                                 throw new ArgumentNullException("Se requiere repositorio de usuarios");
-            _repositoryCotizacion = repositoryCotizacion ??
-                                 throw new ArgumentNullException("Se requiere repositorio de cotizaciones");
+            _repositoryPersona = repositoryPersona ?? throw new ArgumentNullException("Se requiere el repositorio de personas");
+            _repositoryUsuario = repositoryUsuario ?? throw new ArgumentNullException("Se requiere repositorio de usuarios");
+            _repositoryCotizacion = repositoryCotizacion ?? throw new ArgumentNullException("Se requiere repositorio de cotizaciones");
            
             // Inicializacion del repositorio.
             _repositoryPersona.Initialize();
@@ -62,6 +59,11 @@ namespace Core.Controllers
         /// <inheritdoc />
         public void Save(Persona persona, string password)
         {
+            if (persona == null || password == null)
+            {
+                throw new ModelException("persona y/o password es null.");
+            }
+
             // Guardo o actualizo en el backend.
             _repositoryPersona.Add(persona);
 
@@ -82,7 +84,6 @@ namespace Core.Controllers
             
             // Almaceno en el backend
             _repositoryUsuario.Add(usuario);
-            
         }
 
         /// <inheritdoc />
@@ -112,12 +113,15 @@ namespace Core.Controllers
             }
 
             return usuario;
-
         }
 
         /// <inheritdoc />
         public Persona Find(string rutEmail)
         {
+            if (rutEmail == null)
+            {
+                throw new ModelException("rutEmail es null.");
+            }
             return _repositoryPersona.GetAll(p => p.Rut.Equals(rutEmail) || p.Email.Equals(rutEmail)).FirstOrDefault();
         }
 
@@ -128,10 +132,10 @@ namespace Core.Controllers
             {
                 throw new ModelException("La cotizacion es null");
             }
-            
+
             _repositoryCotizacion.Add(cotizacion);
-                       
         }
+
         /// <inheritdoc />
         public void Eliminar(Cotizacion cotizacion)
         {
@@ -146,10 +150,13 @@ namespace Core.Controllers
         /// <inheritdoc />
         public List<Cotizacion> Buscar(string rut)
         {
+            if (rut == null)
+            {
+                throw new ModelException("Rut no puede ser null.");
+            }
             return _repositoryCotizacion.GetAll(p => p.persona.Rut.Equals(rut)).ToList();
         }
-        
-        
+                
         /// <inheritdoc />
         public Cotizacion Buscar(int id)
         {
@@ -159,11 +166,13 @@ namespace Core.Controllers
         /// <inheritdoc />
         public void Modificar(Cotizacion cotizacion)
         {
+            if ( cotizacion == null )
+            {
+                throw new ModelException("Cotizacion no puede ser null.");
+            }
             Cotizacion cotizacionAux = _repositoryCotizacion.GetById(cotizacion.Id);
             Eliminar(cotizacionAux);
-            Agregar(cotizacion);
-          
+            Agregar(cotizacion);          
         }
-                
     }
 }
