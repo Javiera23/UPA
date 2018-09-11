@@ -9,21 +9,12 @@ namespace Core.Models
     /// </summary>
     public class Cotizacion : BaseEntity
     {
-<<<<<<< HEAD
-        [Required] public long precio { get; set;}
-        [Required] public DateTime fecha { get; set; }
-        [Required] public IList<Servicio> servicios = new List<Servicio>();
-        [Required] public Persona persona { get; set; }
-        [Required] public Estado estado { get; set; }
-        
-=======
 
         public DateTime fecha { get; set; }
         public List<Servicio> servicios = new List<Servicio>();
         public Persona persona { get; set; }
         public Estado estado { get; set; }
 
->>>>>>> 81e7ee0a8f731b943987c5e894555071084cbc23
         public override void Validate()
         {
             if (persona == null)
@@ -45,15 +36,6 @@ namespace Core.Models
             {
                 precio += servicio.precio;
             }
-<<<<<<< HEAD
-            
-            if (fecha.CompareTo(DateTime.Now) >= 0)
-            {
-                throw new ModelException("Fecha  no puede ser en el futuro.");
-            }
-        }
-    }
-=======
 
             return precio;
         }
@@ -64,5 +46,4 @@ namespace Core.Models
 
 
 }
->>>>>>> 81e7ee0a8f731b943987c5e894555071084cbc23
 }
