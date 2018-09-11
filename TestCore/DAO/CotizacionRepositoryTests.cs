@@ -41,7 +41,7 @@ namespace TestCore.DAO
             // Repositorio de personas
             CotizacionRepository repo = new CotizacionRepository(dbContext);
 
-            // Creacion
+            // Creacionhjk
 
             Persona persona = new Persona()
                 {
