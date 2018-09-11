@@ -68,11 +68,7 @@ namespace Core.Controllers
         /// <param name="cotizacion"></param>
         void Eliminar(Cotizacion cotizacion);
 
-        /// <summary>
-        /// Modifica una cotizacion del sistema.
-        /// </summary>
-        /// <param name="cotizacion"></param>
-        void Modificar(Cotizacion cotizacion);
+
         
     }
 }

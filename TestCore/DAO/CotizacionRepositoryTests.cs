@@ -75,7 +75,6 @@ namespace TestCore.DAO
             {
                 repo.Add(cotizacion);
                 Assert.NotEmpty(repo.GetAll());
-                _output.WriteLine(repo.GetAll().FirstOrDefault().persona.Rut);
             }
             
             //Busqueda por rut (exitosa)
@@ -111,7 +110,6 @@ namespace TestCore.DAO
                 Cotizacion aux = repo.GetById(cotizacion.Id);
                 repo.Remove(aux);
                 Assert.Null(repo.GetById(cotizacion.Id));
-                //Assert.Empty(repo.GetAll());
                 
             }
             

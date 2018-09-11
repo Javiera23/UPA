@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core;
 using Core.Controllers;
 using Core.DAO;
@@ -58,7 +59,7 @@ namespace TestCore.Controllers
 
                 sistema.Save(persona);
             }
-            
+
             // GetPersonas
             {
                 _output.WriteLine("Testing getPersonas ..");
@@ -111,11 +112,11 @@ namespace TestCore.Controllers
                 _output.WriteLine("Usuario: {0}", Utils.ToJson(usuario));
             }
 
-            // Agregar Cotizaion
-            {
+            // Agregar Cotizacion
+            
                 _output.WriteLine("Testing Agregar Cotizacion ...");
                 Assert.Equal("La cotizacion es null", Assert.Throws<ModelException>(() => sistema.Agregar(null)).Message);
-                Persona persona = new Persona()
+                Persona p = new Persona()
                 {
                     Email = "javiera.munoz01@alumnos.ucn.cl",
                     Nombre = "Javiera",
@@ -128,30 +129,29 @@ namespace TestCore.Controllers
                 {
                     fecha = DateTime.Now,
                     estado = Estado.ACEPTADO,
-                    persona = persona,
+                    persona = p,
                     servicios = new List<Servicio>()
                 };
 
                 sistema.Agregar(cotizacion);
-            }
-            
             
 
             // Buscar Cotizacion
             {
                 Assert.Equal("Rut no puede ser null.", Assert.Throws<ModelException>(() => sistema.Buscar(null)).Message);
+                Assert.NotNull(sistema.Buscar(cotizacion.Id));
+                Assert.NotEmpty(sistema.Buscar(p.Rut));
             }
 
-            // Modificar cotizacion
-            {
-                _output.WriteLine("Testing Modificar Cotizacion ...");
-                // nueva cotizacion es null
-                Assert.Equal("Cotizacion no puede ser null.", Assert.Throws<ModelException>(() => sistema.Modificar(null)).Message);
-            }
 
             // Eliminar Cotizacion
             {
                 _output.WriteLine("Testing Eliminar Cotizacion ...");
+                Assert.Equal("La cotizacion es null", Assert.Throws<ModelException>(() => sistema.Eliminar(null)).Message); 
+                sistema.Eliminar(cotizacion);
+                Assert.Empty(sistema.Buscar("193992773"));
+
+
             }
         }
     }

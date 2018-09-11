@@ -12,18 +12,18 @@ namespace Core.Controllers
     /// </summary>
     public sealed class Sistema : ISistema
     {
-        // Patron Repositorio, generalizado via Generics
+        // Patron Repositorio, generalizado via Generics 
         // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/
         private readonly IRepository<Persona> _repositoryPersona;
 
         private readonly IRepository<Usuario> _repositoryUsuario;
         
-        private readonly IRepository<Cotizacion> _repositoryCotizacion;
+        private readonly CotizacionRepository _repositoryCotizacion;
 
         /// <summary>
         /// Inicializa los repositorios internos de la clase.
         /// </summary>
-        public Sistema(IRepository<Persona> repositoryPersona, IRepository<Usuario> repositoryUsuario,IRepository<Cotizacion> repositoryCotizacion)
+        public Sistema(IRepository<Persona> repositoryPersona, IRepository<Usuario> repositoryUsuario,CotizacionRepository repositoryCotizacion)
         {
             // Setter!
             _repositoryPersona = repositoryPersona ?? throw new ArgumentNullException("Se requiere el repositorio de personas");
@@ -154,7 +154,8 @@ namespace Core.Controllers
             {
                 throw new ModelException("Rut no puede ser null.");
             }
-            return _repositoryCotizacion.GetAll(p => p.persona.Rut.Equals(rut)).ToList();
+
+            return _repositoryCotizacion.GetByRut(rut);
         }
                 
         /// <inheritdoc />
@@ -163,16 +164,5 @@ namespace Core.Controllers
             return _repositoryCotizacion.GetById(id);
         }
 
-        /// <inheritdoc />
-        public void Modificar(Cotizacion cotizacion)
-        {
-            if ( cotizacion == null )
-            {
-                throw new ModelException("Cotizacion no puede ser null.");
-            }
-            Cotizacion cotizacionAux = _repositoryCotizacion.GetById(cotizacion.Id);
-            Eliminar(cotizacionAux);
-            Agregar(cotizacion);          
-        }
     }
 }
