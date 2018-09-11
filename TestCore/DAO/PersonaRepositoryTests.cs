@@ -70,8 +70,7 @@ namespace TestCore.DAO
             
             // Busqueda (no exitosa)
             {
-                Persona persona = repo.GetAll(null).FirstOrDefault();
-                Assert.Null(persona);
+                Assert.Throws<ArgumentNullException>(() => repo.GetAll(null).FirstOrDefault());
             }
             
             // Todos
